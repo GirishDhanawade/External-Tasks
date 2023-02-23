@@ -2,7 +2,8 @@
 //then and only then allow the parent case to change into closed stage
 public class RestrictStatusOfParentCaseHandler 
 {
-    public static void restrictBeforeUpdate(List<Case> newCases, Map<Id, Case> oldMap) {
+    public static void restrictBeforeUpdate(List<Case> newCases, Map<Id, Case> oldMap) 
+    {
         Set<Id> parentCaseIds = new Set<Id>();
         for (Case c : newCases)
         {
@@ -18,12 +19,10 @@ public class RestrictStatusOfParentCaseHandler
             if (childCase.Status != 'Closed')
             {
                 parentToChildStatus.put(childCase.ParentId, false);
-            } else if (!parentToChildStatus.containsKey(childCase.ParentId))
-            {
-                parentToChildStatus.put(childCase.ParentId, true);
             }
         }
-        for (Id parentId : parentCaseIds) {
+        for (Id parentId : parentCaseIds)
+        {
             if (!parentToChildStatus.get(parentId))
             {
                 Case parentCase = oldMap.get(parentId);
